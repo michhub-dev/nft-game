@@ -20,7 +20,7 @@ struct PersonaAttributes {
  uint256 defense;
  uint256 energyLevel;
 }
-
+/// store in an array
 PersonaAttributes[] defaultPersonaAttributes;
 
     constructor(
