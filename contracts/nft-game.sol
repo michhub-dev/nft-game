@@ -2,14 +2,14 @@
 
 pragma solidity ^0.8.0;
 
-/// @title Turn based NFT game
-/// @author Michelle
-/// @notice Building an NFT game 
+// @title Turn based NFT game
+// @author Michelle
+// @notice Building an NFT game 
 
 import "hardhat/console.sol";
 
 contract NftGame {
-/// @notice the character's attribute stored here
+// @notice the character's attribute stored here
 struct PersonaAttributes {
  string name;
  string imageUrl;
@@ -20,7 +20,7 @@ struct PersonaAttributes {
  uint256 defense;
  uint256 energyLevel;
 }
-/// store in an array
+// store in an array
 PersonaAttributes[] defaultPersonaAttributes;
 
     constructor(
@@ -32,8 +32,9 @@ PersonaAttributes[] defaultPersonaAttributes;
         uint256[] memory personaEnergyLevel
     )
     {
-    /// @dev loop through all the attributes and save the values in the contract,
-    /// to be used later when an NFT is minted
+    /*  @notice loop through all the attributes and save the values in the contract,
+     to be used later when an NFT is minted */
+
         for (uint256 i = 0; i < personaNames.length; i +=1) {
             defaultPersonaAttributes.push(PersonaAttributes({
              name: personaNames[i],
