@@ -8,7 +8,9 @@ const main = async () => {
           "http://clipart-library.com/images/Acbzarqc4.jpg",
         "http://clipart-library.com/images/BTaM9pyT8.jpg"], // imagesUrl
         [100, 50, 25, 60], //Hp values
-        [200, 150, 50, 45] // AttackDamage values
+        [200, 150, 50, 45], // AttackDamage values
+        [2, 3, 6, 4], // Defense
+        [15, 10, 5, 18] //Energy level
     );
 
     //@notice wait for the contract to officially mine and deploy to the local blockchain 
