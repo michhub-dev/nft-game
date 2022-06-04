@@ -38,7 +38,7 @@ Counters.Counter private _tokenId;
 // store in an array
 PersonaAttributes[] defaultPersonaAttributes;
 
-// Mapping from the tokenId to the NFT attributes
+// Mapping from the tokenId to the NFT attributes. Store state of the player's NFT
 mapping (uint256 => PersonaAttributes) public nftOwnerAttributes;
 
 /* A mapping from the address to the NFT tokenId.
@@ -79,12 +79,17 @@ mapping (address => uint256) public nftOwner;
         _tokenId.increment();
     }
 
-    // Users hit this function to get their NFT based on the attributeIndex they send in
+    /* Users hit this function to get their NFT based on the attributeIndex they send in
+     where the actual minting is happening. 
+     @param _attributeIndex so players can specify which character they want
+    */
     function mintNft(uint256 _attributeIndex) external {
          // get the current tokenId. It'll start at 1 since it was incremented
          uint256 newTokenId =  _tokenId.current();
 
-         //assigning tokenId to the caller's wallet address
+         /* assigning tokenId to the caller's wallet address
+         this will mint the NFT with the Id, newTokenId to the users address, msg.sender
+         */
          _safeMint(msg.sender, newTokenId);
 
          // map the tokenId to the persona attributes 
