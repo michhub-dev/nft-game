@@ -30,8 +30,20 @@ struct PersonaAttributes {
  uint256 defense;
  uint256 energyLevel;
 }
+
+// tokenId is the NFT unique identifier 
+using Counters for Counters.Counter;
+Counters.Counter private _tokenId;
+
 // store in an array
 PersonaAttributes[] defaultPersonaAttributes;
+
+// Mapping from the tokenId to the NFT attributes
+mapping (uint256 => PersonaAttributes) public nftOwnerAttributes;
+
+/* A mapping from the address to the NFT tokenId.
+ An easy way to store the owner of the NFT and reference it later */
+mapping (address => uint256) public nftOwner;
 
     constructor(
         string[] memory personaNames,
@@ -40,6 +52,8 @@ PersonaAttributes[] defaultPersonaAttributes;
         uint256[] memory personaAttackDamage,
         uint256[] memory personaDefense,
         uint256[] memory personaEnergyLevel
+
+    // name and symbol of the NFT token
     )
     ERC721 ("Hero Game", "HOGE")
     {
@@ -61,5 +75,16 @@ PersonaAttributes[] defaultPersonaAttributes;
         console.log("Successfully initialize with name, imageUrl, hp..", a.name, a.Hp, a.imageUrl);
 
         }
+        //increment the tokenId so that the first NFT has the id of 1
+        _tokenId.increment();
+    }
+
+    // Users hit this function to get their NFT based on the attributeId they send in
+    function mintNft(uint256 _attributeId) external {
+         // get the current tokenId. It'll start at 1 since it was incremented
+         uint256 newTokenId =  _tokenId.current();
+
+         //assigning tokenId to the caller's wallet address
+         _safeMint(msg.sender, newTokenId);
     }
 }
