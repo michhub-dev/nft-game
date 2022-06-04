@@ -23,7 +23,7 @@ import "hardhat/console.sol";
 struct PersonaAttributes {
  string name;
  string imageUrl;
- uint256 id;
+ uint256 attributeIndex;
  uint256 Hp;
  uint256 maxHp;
  uint256 attackDamage;
@@ -64,7 +64,7 @@ mapping (address => uint256) public nftOwner;
             defaultPersonaAttributes.push(PersonaAttributes({
              name: personaNames[i],
              imageUrl: personaImageUrl[i],
-             id: i,
+             attributeIndex: i,
              Hp: personaHp[i],
              maxHp: personaHp[i],
            attackDamage: personaAttackDamage[i],
@@ -79,12 +79,32 @@ mapping (address => uint256) public nftOwner;
         _tokenId.increment();
     }
 
-    // Users hit this function to get their NFT based on the attributeId they send in
-    function mintNft(uint256 _attributeId) external {
+    // Users hit this function to get their NFT based on the attributeIndex they send in
+    function mintNft(uint256 _attributeIndex) external {
          // get the current tokenId. It'll start at 1 since it was incremented
          uint256 newTokenId =  _tokenId.current();
 
          //assigning tokenId to the caller's wallet address
          _safeMint(msg.sender, newTokenId);
+
+         // map the tokenId to the persona attributes 
+         nftOwnerAttributes[newTokenId] = PersonaAttributes({
+             name: defaultPersonaAttributes[_attributeIndex].name,
+             imageUrl: defaultPersonaAttributes[_attributeIndex].imageUrl,
+             attributeIndex: _attributeIndex,
+             Hp: defaultPersonaAttributes[_attributeIndex].Hp,
+             maxHp: defaultPersonaAttributes[_attributeIndex].maxHp,
+             attackDamage: defaultPersonaAttributes[_attributeIndex].attackDamage,
+             defense: defaultPersonaAttributes[_attributeIndex].defense,
+             energyLevel: defaultPersonaAttributes[_attributeIndex].energyLevel
+         });
+         console.log("Minted NFT with tokenId and attributeIndex", newTokenId, _attributeIndex);
+
+    // Easy way to see who owns what NFT 
+    nftOwner[msg.sender] = newTokenId;
+
+    // increment the tokenId for the next token minted
+    _tokenId.increment();
+
     }
 }
