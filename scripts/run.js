@@ -16,6 +16,15 @@ const main = async () => {
     //@notice wait for the contract to officially mine and deploy to the local blockchain 
     await contractFactory.deployed();
     console.log("Contract deployed to..", contractFactory.address);
+
+    // call the mint function here
+    let txn;
+    txn = await contractFactory.mintNft(3);
+    await txn.wait();
+
+    // Get the value of the NFT URI 
+    let getTokenUrl = await contractFactory.tokenURI(1);
+    console.log("Token URI", getTokenUrl);
 }
 
 const runMain = async () => {
