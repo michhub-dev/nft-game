@@ -30,7 +30,7 @@ const main = async () => {
    await txn.wait();
    console.log("Minted NFT #2");
 
-
+console.log("Done deploying the minting..");
    
     /* Get the value of the NFT URI 
     tokenURI is a function on every NFT that returns the actual data attached to the NFT
