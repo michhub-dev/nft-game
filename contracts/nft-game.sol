@@ -35,7 +35,7 @@ struct PersonaAttributes {
 
 // tokenId is the NFT unique identifier 
 using Counters for Counters.Counter;
-Counters.Counter private _tokenId;
+Counters.Counter private _tokenIds;
 
 // store in an array
 PersonaAttributes[] defaultPersonaAttributes;
@@ -78,7 +78,7 @@ mapping (address => uint256) public nftOwner;
 
         }
         //increment the tokenId so that the first NFT has the id of 1
-        _tokenId.increment();
+        _tokenIds.increment();
     }
 
     /* Users hit this function to get their NFT based on the attributeIndex they send in
@@ -87,7 +87,7 @@ mapping (address => uint256) public nftOwner;
     */
     function mintNft(uint256 _attributeIndex) external {
          // get the current tokenId. It'll start at 1 since it was incremented
-         uint256 newTokenId =  _tokenId.current();
+         uint256 newTokenId =  _tokenIds.current();
 
          /* assigning tokenId to the caller's wallet address
          this will mint the NFT with the Id, newTokenId to the users address, msg.sender
@@ -111,7 +111,34 @@ mapping (address => uint256) public nftOwner;
     nftOwner[msg.sender] = newTokenId;
 
     // increment the tokenId for the next token minted
-    _tokenId.increment();
+    _tokenIds.increment();
 
+    }
+
+    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
+        PersonaAttributes memory personAttribute = nftOwnerAttributes[_tokenId];
+
+        string memory attrHp = Strings.toString(personAttribute.Hp);
+        string memory attrMaxHp = Strings.toString(personAttribute.maxHp);
+        string memory attrAttackDamage = Strings.toString(personAttribute.attackDamage);
+
+        string memory json = Base64.encode(
+            abi.encodePacked(
+                '{"name": "',
+                personAttribute.name,
+                '-- NFT #:',
+                Strings.toString(_tokenId),
+                '", "description": "This is an NFT that lets people choose a prefered persona to play a game", "image": "',
+                personAttribute.imageUrl,
+         '", "attributes": [ { "trait_type": "Health Points", "value": ',attrHp,', "max_value":',attrMaxHp,'}, { "trait_type": "Attack Damage", "value": ',
+      attrAttackDamage,'} ]}'
+            )
+        );
+
+        string memory combineData = string(
+            abi.encodePacked("data:application/json;base64,", json)
+        );
+
+        return combineData;
     }
 }
