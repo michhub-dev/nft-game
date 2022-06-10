@@ -173,5 +173,5 @@ mapping (address => uint256) public nftOwner;
         PersonaAttributes storage player = nftOwnerAttributes[playerTokenId];
         console.log("player with character about to attack w/% Hp, attackDamage", player.name, player.Hp, player.attackDamage);
         console.log("Boss has Hp and AttackDamage", bossData.name, bossData.Hp, bossData.attackDamage);
-    }
+}
 }

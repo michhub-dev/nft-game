@@ -26,6 +26,9 @@ const main = async () => {
     txn = await contractFactory.mintNft(3);
     await txn.wait();
 
+    txn = await contractFactory.attackBossBaby();
+    await txn.wait();
+
     /* Get the value of the NFT URI 
     tokenURI is a function on every NFT that returns the actual data attached to the NFT
     */
