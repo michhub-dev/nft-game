@@ -10,7 +10,11 @@ const main = async () => {
         [100, 50, 25, 60], //Hp values
         [200, 150, 50, 45], // AttackDamage values
         [2, 3, 6, 4], // Defense
-        [15, 10, 5, 18] //Energy level
+        [15, 10, 5, 18], //Energy level
+        "Boss Kadunje", // Boss name
+         "https://www.pngall.com/wp-content/uploads/5/The-Boss-Baby-PNG-Free-Image.png", // Boss Image Url 
+         50000, //Boss Hp
+         40 // Boss attack damage 
     );
     //@notice wait for the contract to officially mine and deploy to the local blockchain 
     await contractFactory.deployed();
