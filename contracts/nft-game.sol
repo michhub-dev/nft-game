@@ -163,4 +163,15 @@ mapping (address => uint256) public nftOwner;
 
         return combineData;
     }
+    function attackBossBaby() public {
+        /* 
+        Get the state of the player's NFT 
+        1. grab the NFT tokenId that the player owns using nftOwner[msg.sender]
+        2. grab the player's attribute using nftOwnerAttributes[]
+        */
+        uint256 playerTokenId = nftOwner[msg.sender];
+        PersonaAttributes storage player = nftOwnerAttributes[playerTokenId];
+        console.log("player with character about to attack w/% Hp, attackDamage", player.name, player.Hp, player.attackDamage);
+        console.log("Boss has Hp and AttackDamage", bossData.name, bossData.Hp, bossData.attackDamage);
+    }
 }
