@@ -43,6 +43,15 @@ PersonaAttributes[] defaultPersonaAttributes;
 // Mapping from the tokenId to the NFT attributes. Store state of the player's NFT
 mapping (uint256 => PersonaAttributes) public nftOwnerAttributes;
 
+struct BossData {
+    string name;
+    string imageUrl;
+    uint256 Hp;
+    uint256 maxHp;
+    uint256 attackDamage;
+}
+
+BossData public bossData; 
 /* A mapping from the address to the NFT tokenId.
  An easy way to store the owner of the NFT and reference it later */
 mapping (address => uint256) public nftOwner;
@@ -53,12 +62,25 @@ mapping (address => uint256) public nftOwner;
         uint256[] memory personaHp,
         uint256[] memory personaAttackDamage,
         uint256[] memory personaDefense,
-        uint256[] memory personaEnergyLevel
-
+        uint256[] memory personaEnergyLevel,
+        string memory bossName, // New variable  
+        string memory bossImageUrl,
+        uint256 bossHp,
+        uint256 bossAttackDamage                    
+                                
     // name and symbol of the NFT token
     )
     ERC721 ("Hero Game", "HOGE")
     {
+        //initialize the BossData and save it in the global 'bossData' state variable
+       bossData = BossData({
+           name: bossName,
+           imageUrl: bossImageUrl,
+           Hp: bossHp,
+           maxHp: bossHp,
+           attackDamage: bossAttackDamage
+       }); 
+       console.log("Done initializing Boss with Hp, ImageUri ", bossData.name, bossData.imageUrl, bossData.Hp);
     /*  @notice loop through all the attributes and save the values in the contract,
      to be used later when an NFT is minted */
 
