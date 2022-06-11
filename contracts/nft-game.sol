@@ -21,7 +21,7 @@ import "hardhat/console.sol";
 // Inherit from openzeppelin, the standard NFT contract 
  contract NftGame is ERC721 {
 
-// @notice the character's attribute stored here
+// @notice the persona's attribute stored here
 struct PersonaAttributes {
  string name;
  string imageUrl;
@@ -105,7 +105,7 @@ mapping (address => uint256) public nftOwner;
 
     /* Users hit this function to get their NFT based on the attributeIndex they send in
      where the actual minting is happening. 
-     @param _attributeIndex so players can specify which character they want
+     @param _attributeIndex so players can specify which persona attribute they want
     */
     function mintNft(uint256 _attributeIndex) external {
          // get the current tokenId. It'll start at 1 since it was incremented
@@ -202,4 +202,21 @@ mapping (address => uint256) public nftOwner;
      console.log("Player attack boss baby. New player's Hp", player.Hp);
      console.log("Boss baby attack player. New Boss Hp", bossData.Hp);
 }
+  
+  // Function to check if user has a persona NFT
+
+  function userHasNft() public view returns (PersonaAttributes memory) {
+    // grab the tokenId of the user's persona NFT
+     uint256 tokenIdUser = nftOwner[msg.sender];
+   
+   /* If user has a tokenId return the persona attributes with the state of the user's NFT,
+    else, Return an empty persona attribute */
+     if (tokenIdUser > 0) {
+        return nftOwnerAttributes[tokenIdUser];
+
+     } else {
+        PersonaAttributes memory emptyAttribute;
+         return emptyAttribute;
+     }
+  }
 }
