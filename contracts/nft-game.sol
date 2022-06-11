@@ -180,5 +180,26 @@ mapping (address => uint256) public nftOwner;
    
    // Ensure the boss has more than 0 Hp
      require(bossData.Hp > 0, "Error: Boss must have Hp to attack" );
+
+     /* Allow player to attack boss
+     make sure the bossData Hp doesn't turn into a negative number because it's uint
+     */
+     if (bossData.Hp < player.attackDamage) {
+        bossData.Hp = 0;
+     } else {
+        bossData.Hp = bossData.Hp - player.attackDamage;
+     }
+
+     /* Allow boss to attack player
+     make sure the player's Hp doesn't turn into a negative number because it's uint
+     */
+     if (player.Hp < bossData.attackDamage) {
+        player.Hp = 0;
+     } else {
+        player.Hp = player.Hp - bossData.attackDamage;
+     }
+
+     console.log("Player attack boss baby. New player's Hp", player.Hp);
+     console.log("Boss baby attack player. New Boss Hp", bossData.Hp);
 }
 }
