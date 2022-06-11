@@ -1,6 +1,7 @@
 const main = async () => {
      //@dev this will compile the contract and generate neccesary file to work with the contract under artifect directory
     const gameContractFactory = await hre.ethers.getContractFactory("NftGame");
+
     const contractFactory = await gameContractFactory.deploy(
         ["Naruto", "Superman", "Fire-Binder", "Iron-Man"], // Names
         ["http://clipart-library.com/images/5cRX6857i.png",
@@ -16,6 +17,7 @@ const main = async () => {
          50000, //Boss Hp
          40 // Boss attack damage 
     );
+
     //@notice wait for the contract to officially mine and deploy to the local blockchain 
     await contractFactory.deployed();
    console.log("Contract deployed to ", contractFactory.address);
@@ -30,11 +32,17 @@ const main = async () => {
    await txn.wait();
    console.log("Minted NFT #1");
 
-   txn = await contractFactory.mintNft(2);
-   await txn.wait();
-   console.log("Minted NFT #2");
 
 console.log("Done deploying the minting..");
+
+ // Call attack function
+ txn = await contractFactory.attackBossBaby();
+    await txn.wait();
+
+    txn = await contractFactory.attackBossBaby();
+    await txn.wait();
+
+    console.log("Successful!");
    
     /* Get the value of the NFT URI 
     tokenURI is a function on every NFT that returns the actual data attached to the NFT
