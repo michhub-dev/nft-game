@@ -224,4 +224,9 @@ mapping (address => uint256) public nftOwner;
   function retrieveDefaultAttributes() public view returns (PersonaAttributes[] memory) {
     return defaultPersonaAttributes;
   }
+
+  // Retrieve boss attribute 
+  function getBossData() public view returns (BossData memory) {
+    return bossData;
+  }
 }
