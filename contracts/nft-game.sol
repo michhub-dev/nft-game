@@ -171,7 +171,14 @@ mapping (address => uint256) public nftOwner;
         */
         uint256 playerTokenId = nftOwner[msg.sender];
         PersonaAttributes storage player = nftOwnerAttributes[playerTokenId];
+
         console.log("player with character about to attack w/% Hp, attackDamage", player.name, player.Hp, player.attackDamage);
         console.log("Boss has Hp and AttackDamage", bossData.name, bossData.Hp, bossData.attackDamage);
+     
+     // Ensure the player has more than 0 Hp
+      require(player.Hp > 0, "Error: character must have Hp to attack boss");
+   
+   // Ensure the boss has more than 0 Hp
+     require(bossData.Hp > 0, "Error: Boss must have Hp to attack" );
 }
 }
