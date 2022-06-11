@@ -56,6 +56,12 @@ BossData public bossData;
  An easy way to store the owner of the NFT and reference it later */
 mapping (address => uint256) public nftOwner;
 
+// Event that will fire after minting an NFT for a user
+event personaAttributeMinted(address sender, uint256 tokenId, uint256 attributeIndex);
+
+// An event that will fire when a player attacks a boss
+event attackSuccess(address sender, uint256 newBossHp, uint256 newPlayerHp);
+
     constructor(
         string[] memory personaNames,
         string[] memory personaImageUrl,
@@ -132,8 +138,11 @@ mapping (address => uint256) public nftOwner;
     // Easy way to see who owns what NFT 
     nftOwner[msg.sender] = newTokenId;
 
-    // increment the tokenId for the next token minted
+    // Increment the tokenId for the next token minted
     _tokenIds.increment();
+
+    // This will notify the user when the NFT is done minting 
+    emit personaAttributeMinted(msg.sender, newTokenId, _attributeIndex);
 
     }
 
@@ -201,6 +210,11 @@ mapping (address => uint256) public nftOwner;
 
      console.log("Player attack boss baby. New player's Hp", player.Hp);
      console.log("Boss baby attack player. New Boss Hp", bossData.Hp);
+   
+   /* This event will fire when a player officially attacks the boss 
+   this will return the new boss & player Hp
+    */
+     emit attackSuccess(msg.sender, bossData.Hp, player.Hp);
 }
   
   // Function to check if user has a persona NFT
