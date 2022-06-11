@@ -22,33 +22,7 @@ const main = async () => {
     await contractFactory.deployed();
    console.log("Contract deployed to ", contractFactory.address);
    
-    // call the mint function here
-   let txn;
-   txn = await contractFactory.mintNft(0);
-   await txn.wait();
-   console.log("Minted NFT #0 ");
 
-   txn = await contractFactory.mintNft(1);
-   await txn.wait();
-   console.log("Minted NFT #1");
-
-
-console.log("Done deploying the minting..");
-
- // Call attack function
- txn = await contractFactory.attackBossBaby();
-    await txn.wait();
-
-    txn = await contractFactory.attackBossBaby();
-    await txn.wait();
-
-    console.log("Successful!");
-   
-    /* Get the value of the NFT URI 
-    tokenURI is a function on every NFT that returns the actual data attached to the NFT
-    */
-   let getTokenUrl = contractFactory.tokenURI(1);
-   console.log("Token URI", getTokenUrl);
 }
 const runMain = async () => {
     try{
