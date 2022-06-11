@@ -219,4 +219,9 @@ mapping (address => uint256) public nftOwner;
          return emptyAttribute;
      }
   }
+
+  // Function to retrieve default persona attributes
+  function retrieveDefaultAttributes() public view returns (PersonaAttributes[] memory) {
+    return defaultPersonaAttributes;
+  }
 }
