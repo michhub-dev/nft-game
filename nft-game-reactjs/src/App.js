@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
 
@@ -7,6 +7,26 @@ const TWITTER_HANDLE = 'michyToken';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const App = () => {
+
+  const IsWalletConnected = () => {
+    // check if there's ethereum in the browser 
+    const { ethereum } = window; 
+
+    if(!ethereum) {
+      console.log("You need ethereum wallet to access this site!")
+    } else {
+      console.log("You can proceed to connect your wallet", ethereum)
+    }
+
+    // this will run the function when the page loads
+    useEffect(() => {
+      IsWalletConnected()
+    },[])
+  }
+
+
+
+
   return (
     <div className="App">
       <div className="container">
