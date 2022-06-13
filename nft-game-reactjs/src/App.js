@@ -40,7 +40,25 @@ const [userAccount, setUserAccount] = useState(null);
           }
 
           };
+// Define connect wallet
+const connectToWallet = async () => {
+    try {
+      // Ensure we have access to ethereum 
+      const { ethereum } = window;
 
+      if (!ethereum) {
+        alert("Get Metamask!")
+        return;
+      }
+     // Request access to the account 
+      const accounts = await ethereum.request({method: 'eth_requestAccounts'});
+
+      console.log("Connected", accounts[0])
+      setUserAccount(accounts[0]);
+    } catch (error) {
+      console.log(error);
+    }
+}
 
     // this will run the function when the page loads
     useEffect(() => {
@@ -55,8 +73,11 @@ const [userAccount, setUserAccount] = useState(null);
           <p className="header gradient-text">⚔️ Hero Game ⚔️</p>
           <p className="sub-text">Team up to protect the Metaverse!</p>
           <div className="connect-wallet-container">
-          <iframe src="https://giphy.com/embed/xUA7aYT1c2devuWIFO" title='nft-game' width="480" height="262" frameBorder="0" allowFullScreen></iframe><p>Who's the hero!</p>
+              <iframe src="https://giphy.com/embed/xUA7aYT1c2devuWIFO"
+              title='nft-game' width="480" height="262" frameBorder="0" allowFullScreen></iframe><p>Who's the hero!</p>
           </div>
+          <button className='cta-button connect-wallet-button'
+           onClick={connectToWallet}>Connect Your Wallet to Play</button>
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
