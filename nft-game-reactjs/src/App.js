@@ -74,7 +74,7 @@ const connectToWallet = async () => {
           <p className="sub-text">Team up to protect the Metaverse!</p>
           <div className="connect-wallet-container">
               <iframe src="https://giphy.com/embed/xUA7aYT1c2devuWIFO"
-              title='nft-game' width="480" height="262" frameBorder="0" allowFullScreen></iframe><p>Who's the hero!</p>
+              title='nft-game' width="480" height="262" frameBorder="0" allowFullScreen></iframe><p className='footer-text'>Who's the hero!</p>
           </div>
           <button className='cta-button connect-wallet-button'
            onClick={connectToWallet}>Connect Your Wallet to Play</button>
