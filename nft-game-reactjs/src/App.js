@@ -12,41 +12,41 @@ const [userAccount, setUserAccount] = useState(null);
   // check if there's ethereum in the browser
   const IsWalletConnected = async() => {
 
-         try{
-       
-    // Ensure we have access to window.ethereum  
-    const { ethereum } = window; 
+      try {
+          
+        // Ensure we have access to window.ethereum  
+        const { ethereum } = window; 
 
-    if(!ethereum) {
-      console.log("You need ethereum wallet to access this site!")
-    } else {
-      console.log("You can proceed to connect your wallet", ethereum)
-      
-      // If we are authorized to access the user's wallet
-      const accounts = await ethereum.request({method: 'eth_accounts'});
+        if(!ethereum) {
+          console.log("You need ethereum wallet to access this site!")
+          return;
+        } else {
+                 console.log("You can proceed to connect your wallet", ethereum)
+                  
+                  // If we are authorized to access the user's wallet
+                  const accounts = await ethereum.request({method: 'eth_accounts'});
 
-      // if user has more than one account then grab the first one
-      if (accounts.length !== 0) {
-        const account = accounts[0]
-        console.log("We have found an account", account)
-        setUserAccount(account)
-      } else {
-          console.log("Didn't find an authorized account")
-      }
-    }
+                    // if user has more than one account then grab the first one
+                  if (accounts.length !== 0) {
+                    const account = accounts[0]
+                    console.log("We have found an account", account)
+                    setUserAccount(account)
+                  } else {
+                      console.log("Didn't find an authorized account")
+                  }
+               }
+      } catch (error) {
+              console.log(error)
+          }
 
-         } catch(error) {
-          console.log(error)
-         }
+          };
+
 
     // this will run the function when the page loads
     useEffect(() => {
-      IsWalletConnected()
-    },[])
-  }
-
-
-
+      IsWalletConnected();
+    },[]);
+  
 
   return (
     <div className="App">
@@ -55,7 +55,7 @@ const [userAccount, setUserAccount] = useState(null);
           <p className="header gradient-text">⚔️ Hero Game ⚔️</p>
           <p className="sub-text">Team up to protect the Metaverse!</p>
           <div className="connect-wallet-container">
-          <iframe src="https://giphy.com/embed/xUA7aYT1c2devuWIFO" title='nft-game' width="480" height="262" frameBorder="0" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/rocketbeanstv-weird-crazy-xUA7aYT1c2devuWIFO">via GIPHY</a></p>
+          <iframe src="https://giphy.com/embed/xUA7aYT1c2devuWIFO" title='nft-game' width="480" height="262" frameBorder="0" allowFullScreen></iframe><p>Who's the hero!</p>
           </div>
         </div>
         <div className="footer-container">
