@@ -42,22 +42,22 @@ const [userAccount, setUserAccount] = useState(null);
           };
 // Define connect wallet
 const connectToWallet = async () => {
-    try {
-      // Ensure we have access to ethereum 
-      const { ethereum } = window;
+        try {
+              // Ensure we have access to ethereum 
+              const { ethereum } = window;
 
-      if (!ethereum) {
-        alert("Get Metamask!")
-        return;
-      }
-     // Request access to the account 
-      const accounts = await ethereum.request({method: 'eth_requestAccounts'});
+              if (!ethereum) {
+                alert("Get Metamask!")
+                return;
+              }
+            // Request access to the account 
+              const accounts = await ethereum.request({method: 'eth_requestAccounts'});
 
-      console.log("Connected", accounts[0])
-      setUserAccount(accounts[0]);
-    } catch (error) {
-      console.log(error);
-    }
+              console.log("Connected", accounts[0])
+              setUserAccount(accounts[0]);
+        } catch (error) {
+               console.log(error);
+             }
 }
 
     // this will run the function when the page loads
