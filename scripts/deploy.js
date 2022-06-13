@@ -34,3 +34,5 @@ const runMain = async () => {
     }
 }
 runMain();
+
+// current contract address 0x530ddDFbBb459Af282B44594323Cf8d483825Db3
