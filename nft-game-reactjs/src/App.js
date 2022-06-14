@@ -4,6 +4,7 @@ import './App.css';
 import SelectPersona from './Components/SelectPersona';
 import { CONTRACT_ADDRESS } from './constants';
 import { ethers } from 'ethers';
+import NftGame from './utils/NftGame.json';
 
 // Constants
 const TWITTER_HANDLE = 'michyToken';
@@ -101,6 +102,39 @@ const connectToWallet = async () => {
       IsWalletConnected();
     },[]);
   
+  useEffect(() => {
+         //The function that will interact with the smart contract 
+    const getNftMetadata = async () => {
+           console.log("Checking for persona NFT on contract address", userAccount)
+           
+           /* Main logic to setup the ethers object and call the contract 
+           'Provider' is use to actually talk to Ethereum nodes.
+           */
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = await provider.getSigner();
+
+            // This will create the actual connection to the contract 
+            const gameContract = new ethers.Contract(CONTRACT_ADDRESS, NftGame.abi, signer);
+            
+            // Call the function from the contract that checks if a user already has an NFT 
+            const txn = await gameContract.userHasNft();
+
+            if (txn.name) {
+              console.log("User has persona NFT");
+              setPersonaNFT(transformPersonaData(txn));
+            } else {
+              console.log("No persona NFT found");
+            }
+            // Only run the function if there is a connected wallet 
+      if (userAccount) {
+          console.log("UserAccount", userAccount)
+          getNftMetadata();
+        }    
+
+    };
+         
+         
+  },[userAccount])
 
   return (
     <div className="App">
