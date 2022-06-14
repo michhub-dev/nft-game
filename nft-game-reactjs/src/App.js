@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
 import SelectPersona from './Components/SelectPersona';
-import { CONTRACT_ADDRESS } from './constants';
+import { CONTRACT_ADDRESS, transformPersonaData } from './constants';
 import { ethers } from 'ethers';
 import NftGame from './utils/NftGame.json';
 
