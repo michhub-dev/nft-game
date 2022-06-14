@@ -3,6 +3,7 @@ import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
 import SelectPersona from './Components/SelectPersona';
 import { CONTRACT_ADDRESS } from './constants';
+import { ethers } from 'ethers';
 
 // Constants
 const TWITTER_HANDLE = 'michyToken';
@@ -88,6 +89,15 @@ const connectToWallet = async () => {
 
     // this will run the function when the page loads
     useEffect(() => {
+      const checkForNetwork = async () => {
+        try {
+           if (window.ethereum.networkVersion !== '4') {
+             alert("You need to connect to the rinkeby network!")
+           }
+        } catch(error) {
+          console.log(error)
+        }
+      } 
       IsWalletConnected();
     },[]);
   
