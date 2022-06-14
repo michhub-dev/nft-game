@@ -96,7 +96,7 @@ const connectToWallet = async () => {
         <div className="header-container">
           <p className="header gradient-text">⚔️ Hero Game ⚔️</p>
           <p className="sub-text">Team up to protect the Metaverse!</p>
-        
+           {renderComponent}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
