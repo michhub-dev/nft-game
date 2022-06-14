@@ -10,6 +10,7 @@ const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const App = () => {
   //To store the accounts
 const [userAccount, setUserAccount] = useState(null);
+const [personaNFT, setPersonaNFT] = useState(null);
   // check if there's ethereum in the browser
   const IsWalletConnected = async() => {
 
@@ -40,6 +41,28 @@ const [userAccount, setUserAccount] = useState(null);
               console.log(error)
           }
 
+          };
+          // Render method
+          const renderComponent = () => {
+            
+            if (!userAccount) {
+              return (
+                <div className="connect-wallet-container">
+                <iframe src="https://giphy.com/embed/xUA7aYT1c2devuWIFO"
+                title='nft-game' width="480" height="262" frameBorder="0" allowFullScreen></iframe>
+                 <p className='footer-text'>Who's the hero!</p>
+
+                 
+              <button className='cta-button connect-wallet-button'
+              onClick={connectToWallet}>Connect Your Wallet to Play</button>
+            </div>
+              );
+
+            } else if (userAccount && !personaNFT) {
+               return (
+                <SelectPersona setPersonaNFT={setPersonaNFT} />
+               )
+            }
           };
 // Define connect wallet
 const connectToWallet = async () => {
@@ -73,12 +96,7 @@ const connectToWallet = async () => {
         <div className="header-container">
           <p className="header gradient-text">⚔️ Hero Game ⚔️</p>
           <p className="sub-text">Team up to protect the Metaverse!</p>
-          <div className="connect-wallet-container">
-              <iframe src="https://giphy.com/embed/xUA7aYT1c2devuWIFO"
-              title='nft-game' width="480" height="262" frameBorder="0" allowFullScreen></iframe><p className='footer-text'>Who's the hero!</p>
-          </div>
-          <button className='cta-button connect-wallet-button'
-           onClick={connectToWallet}>Connect Your Wallet to Play</button>
+        
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
