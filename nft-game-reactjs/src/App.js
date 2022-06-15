@@ -111,7 +111,7 @@ const connectToWallet = async () => {
            'Provider' is use to actually talk to Ethereum nodes.
            */
             const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = await provider.getSigner();
+            const signer =  provider.getSigner();
 
             // This will create the actual connection to the contract 
             const gameContract = new ethers.Contract(CONTRACT_ADDRESS, NftGame.abi, signer);
@@ -125,15 +125,15 @@ const connectToWallet = async () => {
             } else {
               console.log("No persona NFT found");
             }
+         };
+           
             // Only run the function if there is a connected wallet 
       if (userAccount) {
           console.log("UserAccount", userAccount)
           getNftMetadata();
         }    
 
-    };
-         
-         
+           
   },[userAccount])
 
   return (
