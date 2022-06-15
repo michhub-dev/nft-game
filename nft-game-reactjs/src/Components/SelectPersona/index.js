@@ -27,6 +27,35 @@ const SelectPersona = ({ setPersonaNFT }) => {
 
     },[])
 
+   useEffect(() => {
+
+        const getPersonas = async () => {
+            try {
+                console.log("Getting contract personas to mint")
+             
+                // Call contract to get all mintable personas
+                const PersonaTXN = await gameContract.retrieveDefaultAttributes();
+                console.log("PersonaTXN", PersonaTXN);
+             
+                // Go through all the data and transform them
+                const personas = PersonaTXN.map((personaData) => {
+                    transformPersonaData(personaData);
+                });
+               
+                // Set all the mintable characters in state
+                setAttributes(personas)
+            } catch (error) {
+                console.log( "Something went wrong while fetching data", error)
+            }
+        }
+
+        // If the gameContract is ready, then show personas 
+        if (gameContract) {
+            getPersonas(); 
+        }
+    },[gameContract])
+
+
     return (
         <div className='select-character-container'>
         <h2>Mint your hero to play the game</h2>
