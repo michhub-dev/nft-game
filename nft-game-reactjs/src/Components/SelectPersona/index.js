@@ -1,7 +1,8 @@
 import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
-import { CONTRACT_ADDRESS } from '../../constants';
+import { CONTRACT_ADDRESS, transformPersonaData } from '../../constants';
 import './SelectPersona.css';
+import NftGame from '../../utils/NftGame.json';
 
 const SelectPersona = ({ setPersonaNFT }) => {
     
@@ -49,7 +50,7 @@ const SelectPersona = ({ setPersonaNFT }) => {
             }
         }
 
-        // If the gameContract is ready, then show personas 
+        // If the gameContract is ready, then display personas 
         if (gameContract) {
             getPersonas(); 
         }
