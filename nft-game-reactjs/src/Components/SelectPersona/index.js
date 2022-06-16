@@ -64,6 +64,7 @@ const SelectPersona = ({ setPersonaNFT }) => {
     )
 
     // Render method
+
     const renderPersonas = () => 
     personas.map((persona, index) => (
         <div className='character-item' key={persona.name}>
@@ -76,5 +77,15 @@ const SelectPersona = ({ setPersonaNFT }) => {
             </button>*/}
         </div>
     ))
+
+    return (
+        <div className='select-character-container'>
+            <h2>Mint your hero to play the game!</h2>
+            // Only show when there are characters in state
+            {personas.length >0 && (
+                <div className='character-grid'>{renderPersonas()}</div>
+            )}
+        </div>
+    )
 }
 export default SelectPersona;
