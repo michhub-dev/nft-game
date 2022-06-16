@@ -59,8 +59,22 @@ const SelectPersona = ({ setPersonaNFT }) => {
 
     return (
         <div className='select-character-container'>
-        <h2>Mint your hero to play the game</h2>
-    </div>
+            <h2>Mint your hero to play the game</h2>
+       </div>
     )
+
+    // Render method
+    const renderPersonas = () => 
+    personas.map((persona, index) => (
+        <div className='character-item' key={persona.name}>
+            <div className='name-container' >
+                <p>{persona.name}</p>
+            </div>
+            <img src={persona.imageURI} alt={persona.name} />
+           { /*<button type='button' className='character-mint-button' onClick={() =>
+                </div> mintPersonaNftAction(index)}>{`Mint ${persona.name}`}
+            </button>*/}
+        </div>
+    ))
 }
 export default SelectPersona;
