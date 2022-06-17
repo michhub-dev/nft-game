@@ -3,17 +3,17 @@ const main = async () => {
     const gameContractFactory = await hre.ethers.getContractFactory("NftGame");
 
     const contractFactory = await gameContractFactory.deploy(
-        ["Naruto", "Superman", "Fire-Binder", "Iron-Man"], // Names
-        ["http://clipart-library.com/images/5cRX6857i.png",
-         "http://clipart-library.com/images/6Tp6Kxxnc.jpg",
-          "http://clipart-library.com/images/Acbzarqc4.jpg",
-        "http://clipart-library.com/images/BTaM9pyT8.jpg"], // imagesUrl
+        ["Naruto", "Superman", "Fire-Binder", "Iron-Man"],  // Names
+        ["./images/naruto.png",
+        "./images/superman.jpg",
+        "./images/fire-binder.jpg",
+        "./images/iron-man.jpg"], // imagesUrl
         [100, 50, 25, 60], //Hp values
         [200, 150, 50, 45], // AttackDamage values
         [2, 3, 6, 4], // Defense
         [15, 10, 5, 18], //Energy level
         "Boss Kadunje", // Boss name
-         "https://www.pngall.com/wp-content/uploads/5/The-Boss-Baby-PNG-Free-Image.png", // Boss Image Url 
+         "./images/boss-kadunje.png", // Boss Image Url 
          50000, //Boss Hp
          40 // Boss attack damage 
     );
