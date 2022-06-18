@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './SelectPersona.css';
 import { ethers } from 'ethers';
-import { CONTRACT_ADDRESS, transformPersonaData } from '../../constants';
+import { CONTRACT_ADDRESS, transformPersonaData } from '../../constants.js';
 import NftGame from '../../utils/NftGame.json';
 
 
@@ -41,7 +41,7 @@ const SelectPersona = ({ setPersonaNFT }) => {
   },[]);
 
   useEffect(() => {
-    const getPersonas = async() => {
+    const getPersonas = async () => {
         try{
             console.log("Trying to get contract to mint...");
 
@@ -50,9 +50,10 @@ const SelectPersona = ({ setPersonaNFT }) => {
             console.log("personasTXN", personasTXN);
 
             // Go through all the personas and transform the data
-            const personas = personasTXN.map((personaData) => {
-                transformPersonaData(personaData);
-            });
+            const personas = personasTXN.map((personaData) => 
+                transformPersonaData(personaData)
+                //console.log("personas", personas)
+            );
             // Set all mintable personas in state
             setPersonas(personas);
         } catch(error) {

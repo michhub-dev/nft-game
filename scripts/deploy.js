@@ -4,16 +4,16 @@ const main = async () => {
 
     const contractFactory = await gameContractFactory.deploy(
         ["Naruto", "Superman", "Fire-Binder", "Iron-Man"],  // Names
-        ["https://imgur.com/a/luWMEp4",
-        "https://imgur.com/a/P1rEt5A",
-        "https://imgur.com/a/Ksda8n0",
-        "https://imgur.com/a/Xv0cXbY"], // imagesUrl
+        ["./images/naruto.png",
+        "./images/superman.jpg",
+        "./images/fire-binder.jpg",
+        "./images/iron-man.jpg"], // imagesUrl
         [100, 50, 25, 60], //Hp values
         [200, 150, 50, 45], // AttackDamage values
         [2, 3, 6, 4], // Defense
         [15, 10, 5, 18], //Energy level
         "Boss Kadunje", // Boss name
-         "https://imgur.com/a/JCNpYsn", // Boss Image Url 
+         "./images/boss-kadunje.png", // Boss Image Url 
          50000, //Boss Hp
          40 // Boss attack damage 
     );
