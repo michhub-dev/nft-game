@@ -40,11 +40,11 @@ const main = async () => {
 
     console.log("------------------------------------------------------------");
 
-    /* Get the value of the NFT URI 
+    /* Get the value of the NFT URl
     tokenURI is a function on every NFT that returns the actual data attached to the NFT
     */
     let getTokenUrl = await contractFactory.tokenURI(1);
-    console.log("Token URI", getTokenUrl);
+    console.log("Token URl", getTokenUrl);
 }
 
 const runMain = async () => {

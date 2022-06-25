@@ -24,7 +24,7 @@ import "hardhat/console.sol";
 // @notice the persona's attribute stored here
 struct PersonaAttributes {
  string name;
- string imageUrl;
+ string imageURI;
  uint256 attributeIndex;
  uint256 Hp;
  uint256 maxHp;
@@ -45,7 +45,7 @@ mapping (uint256 => PersonaAttributes) public nftOwnerAttributes;
 
 struct BossData {
     string name;
-    string imageUrl;
+    string imageURI;
     uint256 Hp;
     uint256 maxHp;
     uint256 attackDamage;
@@ -64,13 +64,13 @@ event attackSuccess(address sender, uint256 newBossHp, uint256 newPlayerHp);
 
     constructor(
         string[] memory personaNames,
-        string[] memory personaImageUrl,
+        string[] memory personaImageURIs,
         uint256[] memory personaHp,
         uint256[] memory personaAttackDamage,
         uint256[] memory personaDefense,
         uint256[] memory personaEnergyLevel,
         string memory bossName, // New variable  
-        string memory bossImageUrl,
+        string memory bossImageURI,
         uint256 bossHp,
         uint256 bossAttackDamage                    
                                 
@@ -81,19 +81,19 @@ event attackSuccess(address sender, uint256 newBossHp, uint256 newPlayerHp);
         //initialize the BossData and save it in the global 'bossData' state variable
        bossData = BossData({
            name: bossName,
-           imageUrl: bossImageUrl,
+           imageURI: bossImageURI,
            Hp: bossHp,
            maxHp: bossHp,
            attackDamage: bossAttackDamage
        }); 
-       console.log("Done initializing Boss with Hp, ImageUri ", bossData.name, bossData.imageUrl, bossData.Hp);
+       console.log("Done initializing Boss with Hp, ImageUri ", bossData.name, bossData.imageURI, bossData.Hp);
     /*  @notice loop through all the attributes and save the values in the contract,
      to be used later when an NFT is minted */
 
         for (uint256 i = 0; i < personaNames.length; i +=1) {
             defaultPersonaAttributes.push(PersonaAttributes({
              name: personaNames[i],
-             imageUrl: personaImageUrl[i],
+             imageURI: personaImageURIs[i],
              attributeIndex: i,
              Hp: personaHp[i],
              maxHp: personaHp[i],
@@ -102,7 +102,7 @@ event attackSuccess(address sender, uint256 newBossHp, uint256 newPlayerHp);
            energyLevel: personaEnergyLevel[i]
             }));
         PersonaAttributes memory a = defaultPersonaAttributes[i];
-        console.log("Successfully initialize with name, imageUrl, hp..", a.name, a.Hp, a.imageUrl);
+        console.log("Successfully initialize with name, imageUrl, hp..", a.name, a.Hp, a.imageURI);
 
         }
         //increment the tokenId so that the first NFT has the id of 1
@@ -125,7 +125,7 @@ event attackSuccess(address sender, uint256 newBossHp, uint256 newPlayerHp);
          // map the tokenId to the persona attributes 
          nftOwnerAttributes[newTokenId] = PersonaAttributes({
              name: defaultPersonaAttributes[_attributeIndex].name,
-             imageUrl: defaultPersonaAttributes[_attributeIndex].imageUrl,
+             imageURI: defaultPersonaAttributes[_attributeIndex].imageURI,
              attributeIndex: _attributeIndex,
              Hp: defaultPersonaAttributes[_attributeIndex].Hp,
              maxHp: defaultPersonaAttributes[_attributeIndex].maxHp,
@@ -160,7 +160,7 @@ event attackSuccess(address sender, uint256 newBossHp, uint256 newPlayerHp);
                 '-- NFT #:',
                 Strings.toString(_tokenId),
                 '", "description": "This is an NFT that lets people choose a prefered persona to play a game", "image": "',
-                personAttribute.imageUrl,
+                personAttribute.imageURI,
          '", "attributes": [ { "trait_type": "Health Points", "value": ',attrHp,', "max_value":',attrMaxHp,'}, { "trait_type": "Attack Damage", "value": ',
       attrAttackDamage,'} ]}'
             )
