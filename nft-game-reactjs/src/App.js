@@ -79,17 +79,18 @@ const connectToWallet = async () => {
                 return;
               }
             // Request access to the account 
-              const accounts = await ethereum.request({method: 'eth_requestAccounts'});
+              const accounts = await ethereum.request({ method: 'eth_requestAccounts',});
 
-              console.log("Connected", accounts[0])
+              console.log("Connected", accounts[0]);
               setUserAccount(accounts[0]);
         } catch (error) {
                console.log(error);
-             }
-}
+             };
+};
 
     // this will run the function when the page loads
     useEffect(() => {
+      IsWalletConnected();
       const checkForNetwork = async () => {
         try {
            if (window.ethereum.networkVersion !== '4') {
@@ -99,7 +100,7 @@ const connectToWallet = async () => {
           console.log(error)
         }
       } 
-      IsWalletConnected();
+    
     },[]);
   
   useEffect(() => {
@@ -121,7 +122,7 @@ const connectToWallet = async () => {
 
             if (txn.name) {
               console.log("User has persona NFT");
-              setPersonaNFT(transformPersonaData(txn));
+              setPersonaNFT(transformPersonaData(personaNFT));
             } else {
               console.log("No persona NFT found");
             }
@@ -134,7 +135,7 @@ const connectToWallet = async () => {
         }    
 
            
-  },[userAccount])
+  },[userAccount]);
 
   return (
     <div className="App">
