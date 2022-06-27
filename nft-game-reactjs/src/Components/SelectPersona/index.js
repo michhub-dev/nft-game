@@ -61,10 +61,36 @@ const SelectPersona = ({ setPersonaNFT }) => {
           console.log("Something went wrong fetching personas. Couldn't get personas", error);
         }
     };
+
+      // A callback method that will fire when this event is received
+      const onPersonaMint = async ( sender, tokenId, personaIndex ) => {
+             console.log(` onPersonaMint - sender: ${sender}, tokenId: ${tokenId}, personaIdex: ${personaIndex}`);
+      
+
+            /* Once persona Nft is minted, fetch the metadata from the contract
+            and set it in state to move onto the arena 
+            */ 
+            if (gameContract) {
+            const personaNFT = await gameContract.userHasNft();
+            console.log("personaNFT", personaNFT);
+            setPersonaNFT(transformPersonaData(personaNFT));
+            }
+      };  
+
     // If gameContract is ready, get personas
     if (gameContract) {
         getPersonas();
+
+        // Setup NFT minted listener 
+        gameContract.on('personaNFTMinted', onPersonaMint);
     }
+
+    return () => {
+        // When the component unmounts, clean the listener
+        if (gameContract) {
+            gameContract.off('personaNFTMinted', onPersonaMint);
+        }
+    };
   },[gameContract]);
   
   //Render function
