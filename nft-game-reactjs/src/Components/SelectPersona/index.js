@@ -20,20 +20,20 @@ const SelectPersona = ({ setPersonaNFT }) => {
             console.log("mintTXN", mintTXN);
         }
      } catch (error) {
-        console.warn("mintPersonaNFTAction", error);
-     }
-   } 
+        console.warn("mintPersonaNFTAction error", error);
+     };
+   }; 
 
   useEffect(() =>{
-    const {ethereum} = window;
+    const { ethereum } = window;
 
     if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const gameContract = new ethers.Contract(CONTRACT_ADDRESS, NftGame.abi, signer);
        
         // Set the gameContract in state
-        setGameContract(gameContract)
+        setGameContract(gameContract);
     } else {
         console.log("Ethereum object not found")
     }
@@ -42,7 +42,7 @@ const SelectPersona = ({ setPersonaNFT }) => {
 
   useEffect(() => {
     const getPersonas = async () => {
-        try{
+        try {
             console.log("Trying to get contract to mint...");
 
             //call contract to get all mintable personas
@@ -51,9 +51,10 @@ const SelectPersona = ({ setPersonaNFT }) => {
 
             // Go through all the personas and transform the data
             const personas = personasTXN.map((personaData) => 
-                transformPersonaData(personaData)
-                //console.log("personas", personas)
+                transformPersonaData(personaData)  
             );
+            console.log("personas", personas);
+
             // Set all mintable personas in state
             setPersonas(personas);
         } catch(error) {
@@ -73,9 +74,9 @@ const SelectPersona = ({ setPersonaNFT }) => {
             <div className='name-container'>
                 <p>{persona.name}</p>
             </div>
-            <img src={persona.imageURI} alt={persona.name} 
-                className="character-mint-button" />
-            <button onClick={() => mintPersonaNFTAction(index)}>
+            <img  src={persona.imageURI} alt={persona.name} 
+                 />
+            <button type="button" className="character-mint-button" onClick={() => mintPersonaNFTAction(index)}>
                 {`Mint ${persona.name}`}
              </button>
         </div>

@@ -122,7 +122,7 @@ const connectToWallet = async () => {
 
             if (txn.name) {
               console.log("User has persona NFT");
-              setPersonaNFT(transformPersonaData(personaNFT));
+              setPersonaNFT(transformPersonaData(txn));
             } else {
               console.log("No persona NFT found");
             }
