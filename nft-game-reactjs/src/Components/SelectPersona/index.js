@@ -73,6 +73,7 @@ const SelectPersona = ({ setPersonaNFT }) => {
             and set it in state to move onto the arena 
             */ 
             if (gameContract) {
+                // Call the userHasNft function which will return all the metadata 
             const personaNFT = await gameContract.userHasNft();
             console.log("personaNFT", personaNFT);
             setPersonaNFT(transformPersonaData(personaNFT));
@@ -83,12 +84,17 @@ const SelectPersona = ({ setPersonaNFT }) => {
     if (gameContract) {
         getPersonas();
 
-        // Setup NFT minted listener 
+        /* Setup NFT minted listener 
+           Use 'gameContract' object to listen for the 'personaAttributeMinted' fired from the smart contract. 
+           The UI will then run the 'onPersonaMint' logic  
+         */
         gameContract.on('personaAttributeMinted', onPersonaMint);
     }
 
     return () => {
-        // When the component unmounts, clean the listener
+        /* When the component unmounts, clean the listener
+        Stop listening to this event when the components is not being used anymore
+         */
         if (gameContract) {
             gameContract.off('personaAttributeMinted', onPersonaMint);
         }
