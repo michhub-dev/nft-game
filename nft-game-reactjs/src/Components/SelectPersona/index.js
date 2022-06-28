@@ -62,7 +62,9 @@ const SelectPersona = ({ setPersonaNFT }) => {
         }
     };
 
-      // A callback method that will fire when this event is received
+      /* A callback method that will fire when this event is received.
+         The method is called anytime a new persona NFT is minted 
+       */
       const onPersonaMint = async ( sender, tokenId, personaIndex ) => {
              console.log(` onPersonaMint - sender: ${sender}, tokenId: ${tokenId}, personaIdex: ${personaIndex}`);
       
@@ -82,13 +84,13 @@ const SelectPersona = ({ setPersonaNFT }) => {
         getPersonas();
 
         // Setup NFT minted listener 
-        gameContract.on('personaNFTMinted', onPersonaMint);
+        gameContract.on('personaAttributeMinted', onPersonaMint);
     }
 
     return () => {
         // When the component unmounts, clean the listener
         if (gameContract) {
-            gameContract.off('personaNFTMinted', onPersonaMint);
+            gameContract.off('personaAttributeMinted', onPersonaMint);
         }
     };
   },[gameContract]);
