@@ -17,6 +17,7 @@ const SelectPersona = ({ setPersonaNFT }) => {
             console.log("Minting persona...");
             const mintTXN = await gameContract.mintNft(personaId);
             await mintTXN.wait();
+            alert(`Your NFT is ready, view it here: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId}`)
             console.log("mintTXN", mintTXN);
         }
      } catch (error) {
