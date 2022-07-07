@@ -7,7 +7,7 @@
 
 .container {
   height: 100%;
-  background-color: #3e9e66;
+  background-color: #b0e4c6;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,11 +21,12 @@
   margin: 0;
   font-size: 50px;
   font-weight: bold;
-  color: rgb(224, 140, 140);
+  color: rgb(75, 12, 12);
 }
 
 .sub-text {
   font-size: 25px;
+  font-weight: bold;
   color: rgb(237, 243, 243);
 }
 
@@ -80,7 +81,7 @@
 }
 
 .opensea-button {
-  background-color: rgb(32, 129, 226);
+  background-color: rgb(218, 21, 135);
 }
 
 .mint-count {

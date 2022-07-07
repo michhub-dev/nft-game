@@ -17,8 +17,8 @@ const SelectPersona = ({ setPersonaNFT }) => {
             console.log("Minting persona...");
             const mintTXN = await gameContract.mintNft(personaId);
             await mintTXN.wait();
-            alert(`Your NFT is ready, view it here: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId}`)
-            console.log("mintTXN", mintTXN);
+            alert(`Your NFT is ready, view it here: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId}`);
+            console.log("mintTXN", mintTXN); 
         }
      } catch (error) {
         console.warn("mintPersonaNFTAction error", error);
@@ -66,8 +66,8 @@ const SelectPersona = ({ setPersonaNFT }) => {
       /* A callback method that will fire when this event is received.
          The method is called anytime a new persona NFT is minted 
        */
-      const onPersonaMint = async ( sender, tokenId, personaIndex ) => {
-             console.log(` onPersonaMint - sender: ${sender}, tokenId: ${tokenId}, personaIdex: ${personaIndex}`);
+      const onPersonaMint = async ( sender,  attributeIndex ) => {
+             console.log(` personaAttributeMinted - sender: ${sender}, tokenId: ${tokenId.toNumber()}, attributeIndex: ${attributeIndex.toNumber()}`);
       
 
             /* Once persona Nft is minted, fetch the metadata from the contract
@@ -81,7 +81,7 @@ const SelectPersona = ({ setPersonaNFT }) => {
             }
       };  
 
-    // If gameContract is ready, get personas
+    // If gameContract is ready, get personas 
     if (gameContract) {
         getPersonas();
 

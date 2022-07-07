@@ -69,7 +69,7 @@ event attackSuccess(address sender, uint256 newBossHp, uint256 newPlayerHp);
         uint256[] memory personaAttackDamage,
         uint256[] memory personaDefense,
         uint256[] memory personaEnergyLevel,
-        string memory bossName, // New variable  
+        string memory bossName, // boss variable  
         string memory bossImageURI,
         uint256 bossHp,
         uint256 bossAttackDamage                    
@@ -120,7 +120,7 @@ event attackSuccess(address sender, uint256 newBossHp, uint256 newPlayerHp);
          /* assigning tokenId to the caller's wallet address
          this will mint the NFT with the Id, newTokenId to the users address, msg.sender
          */
-         _safeMint(msg.sender, newTokenId);
+         _safeMint(msg.sender, newTokenId); 
 
          // map the tokenId to the persona attributes 
          nftOwnerAttributes[newTokenId] = PersonaAttributes({
